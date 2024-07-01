@@ -1,0 +1,69 @@
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Varela+Round&display=swap');
+
+body {
+  background-color: #FCFCFC;
+  color: #333333;
+  font-family: 'Varela Round', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.App {
+  text-align: center;
+  background: #FFFFFF;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-family: 'Baloo 2', cursive;
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+input[type="number"] {
+  padding: 10px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #333333;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 5px;
+}
+
+button:hover {
+  background-color: #555555;
+}
+
+.result {
+  margin-top: 20px;
+}
+
+a {
+  color: #1E90FF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin: 5px 0;
+}
