@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
@@ -14,7 +13,7 @@ function App() {
   const [showResult, setShowResult] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
-  const [resultMessage, setResultMessage] = useState("");
+  const [results, setResults] = useState(Array(10).fill(null));
 
   useEffect(() => {
     if (gameStarted) {
@@ -51,13 +50,14 @@ function App() {
 
     const userGuess = parseFloat(guess);
 
+    const newResults = [...results];
     if (userGuess >= minSalary && userGuess <= maxSalary) {
       setScore(score + 1);
-      setResultMessage(<p style={{ color: "green" }}>Correct</p>);
+      newResults[currentJobIndex] = "correct";
     } else {
-      setResultMessage(<p style={{ color: "red" }}>Incorrect</p>);
+      newResults[currentJobIndex] = "incorrect";
     }
-
+    setResults(newResults);
     setShowResult(true);
   };
 
@@ -77,19 +77,21 @@ function App() {
     setScore(0);
     setCurrentJobIndex(0);
     setGameOver(false);
+    setResults(Array(10).fill(null));
+    fetchJob();
   };
 
   const playAgain = () => {
     setGameStarted(false);
     setShowResult(false);
-    setResultMessage("");
+    setGameOver(false);
   };
 
   if (!gameStarted) {
     return (
       <div className="App">
         <h1>Job Board Game</h1>
-        <button onClick={startGame}>Start Game</button>
+        <button onClick={startGame}>Start</button>
       </div>
     );
   }
@@ -101,8 +103,7 @@ function App() {
   return (
     <div className="App">
       {gameOver ? (
-        <div className="result">
-          <h2>Game Over!</h2>
+        <div>
           <p>Your final score is: {score}</p>
           <button onClick={playAgain}>Play Again</button>
         </div>
@@ -118,28 +119,37 @@ function App() {
                 onChange={(e) => setGuess(e.target.value)}
                 placeholder="Guess the salary..."
               />
-              <button onClick={handleGuess}>Submit Guess</button>
+              <button onClick={handleGuess}>Submit</button>
             </>
           )}
           {showResult && (
             <div>
-              {resultMessage}
-              <p>
-                Salary Range: ${currentJob.PositionRemuneration[0].MinimumRange}{" "}
-                - ${currentJob.PositionRemuneration[0].MaximumRange}
-              </p>
               <a
                 href={currentJob.ApplyURI[0]}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Job Posting Link
+                <p>
+                  Salary Range: $
+                  {currentJob.PositionRemuneration[0].MinimumRange} - $
+                  {currentJob.PositionRemuneration[0].MaximumRange}
+                </p>
               </a>
-              <button onClick={nextJob}>Next Posting</button>
+              {currentJobIndex < 9 ? (
+                <button onClick={nextJob}>Next</button>
+              ) : (
+                <button onClick={playAgain}>Play Again</button>
+              )}
             </div>
           )}
-          <p>Question: {currentJobIndex + 1} / 10</p>
-          <p>Score: {score}</p>
+          <div className="question-indicator">
+            {results.map((result, i) => (
+              <div
+                key={i}
+                className={`circle ${result === "correct" ? "correct" : result === "incorrect" ? "incorrect" : ""}`}
+              ></div>
+            ))}
+          </div>
         </div>
       )}
     </div>

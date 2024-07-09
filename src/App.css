@@ -56,14 +56,36 @@ button:hover {
 }
 
 a {
-  color: #1E90FF;
+  color: #1E90FF; /* Blue color for link */
   text-decoration: none;
 }
 
-a:hover {
+a:hover p {
   text-decoration: underline;
 }
 
 p {
   margin: 5px 0;
+}
+
+.question-indicator {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.circle {
+  width: 15px;
+  height: 15px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background-color: #CCCCCC;
+}
+
+.circle.correct {
+  background-color: green;
+}
+
+.circle.incorrect {
+  background-color: red;
 }
