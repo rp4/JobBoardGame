@@ -88,7 +88,7 @@ function App() {
   if (!gameStarted) {
     return (
       <div className="App">
-        <h1>Guess the Salary</h1>
+        <h1>Job Board Game</h1>
         <button onClick={startGame}>Start Game</button>
       </div>
     );
@@ -116,7 +116,7 @@ function App() {
                 type="number"
                 value={guess}
                 onChange={(e) => setGuess(e.target.value)}
-                placeholder="Enter your guess"
+                placeholder="Guess the salary..."
               />
               <button onClick={handleGuess}>Submit Guess</button>
             </>

@@ -4,17 +4,79 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React + TypeScript + Replit</title>
+    <title>Job Board Game</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      #replitBadge {
+        position: fixed;
+        cursor: pointer;
+        z-index: 100;
+        transition: transform 100ms ease-in-out;
+        width: 100px; /* Adjust width for desktop */
+        height: auto; /* Maintain aspect ratio */
+      }
+
+      #replitBadge:hover {
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 600px) {
+        #replitBadge {
+          width: 70px; /* Adjust width for mobile */
+          bottom: 1rem !important;
+          right: 1rem !important;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/index.jsx"></script>
 
-    <!--
-    This script places a badge on your repl's full-browser view back to your repl's cover
-    page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
-    teal, blue, blurple, magenta, pink!
-    -->
-    <script src="badge.js" theme="dark" position="bottom-right"></script>
+    <!-- Badge Script -->
+    <script>
+      (function replitBadge() {
+        const theme = "dark";
+        const position = "bottom-right";
+        const imageUrl = "favicon.svg"; // Update this to the path of your image
+
+        // Define positions
+        const offset = "1.5rem";
+        const validPositions = {
+          "top-left": { top: offset, left: offset },
+          "top-right": { top: offset, right: offset },
+          "bottom-left": { bottom: offset, left: offset },
+          "bottom-right": { bottom: offset, right: offset },
+        };
+
+        // Ensure positions are valid
+        if (!validPositions.hasOwnProperty(position)) {
+          console.warn(
+            `${position} is not a valid position, defaulting to bottom-left`,
+          );
+          position = "bottom-left";
+        }
+
+        // Create link & styles
+        const badgeAnchor = document.createElement("a");
+        Object.assign(badgeAnchor, {
+          target: "_blank",
+          href: "https://dadyears.art",
+        });
+
+        // Create badge image & styles
+        const badgeImage = document.createElement("img");
+        badgeImage.src = imageUrl;
+        badgeImage.id = "replitBadge";
+        Object.assign(badgeImage.style, validPositions[position]);
+
+        // Append badge to page
+        badgeAnchor.appendChild(badgeImage);
+        document.body.appendChild(badgeAnchor);
+      })();
+    </script>
   </body>
 </html>
