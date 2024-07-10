@@ -35,6 +35,7 @@ input[type="number"] {
   border: 1px solid #CCCCCC;
   border-radius: 5px;
   margin-bottom: 10px;
+  font-size: 16px; /* Prevent zooming on mobile */
 }
 
 button {
