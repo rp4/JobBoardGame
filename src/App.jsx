@@ -13,7 +13,7 @@ function App() {
   const [showResult, setShowResult] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
-  const [results, setResults] = useState(Array(10).fill(null));
+  const [results, setResults] = useState(Array(0).fill(null));
 
   useEffect(() => {
     if (gameStarted) {
@@ -116,8 +116,17 @@ function App() {
               <input
                 type="number"
                 value={guess}
-                onChange={(e) => setGuess(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Allow only positive integers
+                  if (/^\d*$/.test(value)) {
+                    setGuess(value);
+                  }
+                }}
                 placeholder="Guess the salary..."
+                min="0"
+                step="10000"
+                pattern="\d*"
               />
               <button onClick={handleGuess}>Submit</button>
             </>
